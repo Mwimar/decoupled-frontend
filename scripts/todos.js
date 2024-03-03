@@ -105,6 +105,25 @@ async function updateTodo(newTodoText) {
   editedTodoElement = null;
 }
 
+async function deleteTodo(event) {
+  const clickedButtonElement = event.target;
+  const todoElement = clickedButtonElement.parentElement.parentElement;
+  const todoId = todoElement.dataset.todoid;
+
+  let response;
+
+  try {
+    response = await fetch("http://localhost:3000/todos/" + todoId, {
+      method: "DELETE",
+    });
+  } catch (error) {
+    alert("Something went wrong!");
+    return;
+  }
+
+  todoElement.remove();
+}
+
 function saveTodo(event) {
   event.preventDefault();
 
