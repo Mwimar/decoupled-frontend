@@ -80,6 +80,31 @@ async function createTodo(todoText) {
   createTodoListItem(todoText, todoId);
 }
 
+async function updateTodo(newTodoText) {
+  const todoId = editedTodoElement.dataset.todoid;
+  let response;
+
+  try {
+    response = await fetch("http://localhost:3000/todos/" + todoId, {
+      method: "PATCH",
+      body: JSON.stringify({
+        newText: newTodoText,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    alert("Something went wrong!");
+    return;
+  }
+
+  editedTodoElement.firstElementChild.textContent = newTodoText;
+
+  todoFormElement.querySelector("input").value = "";
+  editedTodoElement = null;
+}
+
 function saveTodo(event) {
   event.preventDefault();
 
