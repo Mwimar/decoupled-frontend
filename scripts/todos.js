@@ -51,6 +51,35 @@ function createTodoListItem(todoText, todoId) {
   todosListElement.appendChild(newTodoItemElement);
 }
 
+async function createTodo(todoText) {
+  let response;
+
+  try {
+    response = await fetch("http://localhost:3000/todos", {
+      method: "POST",
+      body: JSON.stringify({
+        text: todoText,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    alert("Something went wrong!");
+    return;
+  }
+
+  if (!response.ok) {
+    alert("Something went wrong!");
+    return;
+  }
+
+  const responseData = await response.json();
+  const todoId = responseData.createdTodo.id;
+
+  createTodoListItem(todoText, todoId);
+}
+
 function saveTodo(event) {
   event.preventDefault();
 
@@ -58,8 +87,10 @@ function saveTodo(event) {
   const enteredTodoText = formInput.get("text");
 
   if (!editedTodoElement) {
+    //when adding a new todo
     createTodo(enteredTodoText);
   } else {
+    //when updating an existing todo
     updateTodo(enteredTodoText);
   }
 }
