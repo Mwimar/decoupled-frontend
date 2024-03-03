@@ -50,3 +50,15 @@ function createTodoListItem(todoText, todoId) {
 
   todosListElement.appendChild(newTodoItemElement);
 }
+
+function startTodoEditing(event) {
+  const clickedButtonElement = event.target;
+  editedTodoElement = clickedButtonElement.parentElement.parentElement;
+  const currentText = editedTodoElement.firstElementChild.textContent;
+
+  todoFormElement.querySelector("input").value = currentText;
+}
+
+todoFormElement.addEventListener("submit", saveTodo);
+
+loadTodos();
