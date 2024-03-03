@@ -51,6 +51,19 @@ function createTodoListItem(todoText, todoId) {
   todosListElement.appendChild(newTodoItemElement);
 }
 
+function saveTodo(event) {
+  event.preventDefault();
+
+  const formInput = new FormData(event.target);
+  const enteredTodoText = formInput.get("text");
+
+  if (!editedTodoElement) {
+    createTodo(enteredTodoText);
+  } else {
+    updateTodo(enteredTodoText);
+  }
+}
+
 function startTodoEditing(event) {
   const clickedButtonElement = event.target;
   editedTodoElement = clickedButtonElement.parentElement.parentElement;
