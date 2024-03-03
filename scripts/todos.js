@@ -1,5 +1,5 @@
 const todoFormElement = document.querySelector("#todo-management form");
-const todoListElement = document.getElementById("todos-list");
+const todosListElement = document.getElementById("todos-list");
 
 let editedTodoElement;
 
@@ -17,4 +17,36 @@ async function loadTodos() {
 if (!response.ok) {
   alert("Something went wrong!");
   return;
+}
+
+const responseData = await response.json();
+const todos = responseData.todos;
+
+for (const todo of todos) {
+  createTodoListItem(todo.text, todo.id);
+}
+
+function createTodoListItem(todoText, todoId) {
+  const newTodoItemElement = document.createElement("li");
+  newTodoItemElement.dataset.todoid = todoId;
+
+  const todoTextElement = document.createElement("p");
+  todoTextElement.textContent = todoText;
+
+  const editTodoButtonElement = document.createElement("button");
+  editTodoButtonElement.textContent = "Edit";
+  editTodoButtonElement, addEventListener("click", startTodoEditing);
+
+  const deleteTodoButtonElement = document.createElement("button");
+  deleteTodoButtonElement.textContent = "Delete";
+  deleteTodoButtonElement.addEventListener("click", deleteTodo);
+  const todoActionsWrapperElement = document.createElement("div");
+
+  todoActionsWrapperElement.appendChild(editTodoButtonElement);
+  todoActionsWrapperElement.appendChild(deleteTodoButtonElement);
+
+  newTodoItemElement.appendChild(todoTextElement);
+  newTodoItemElement.appendChild(todoActionsWrapperElement);
+
+  todosListElement.appendChild(newTodoItemElement);
 }
