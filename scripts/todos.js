@@ -1,29 +1,29 @@
 const todoFormElement = document.querySelector("#todo-management form");
+
 const todosListElement = document.getElementById("todos-list");
 
 let editedTodoElement;
 
-let response;
-
 async function loadTodos() {
+  let response;
   try {
     response = await fetch("http://localhost:3000/todos");
   } catch (error) {
     alert("Something Went wrong!");
+    return;
   }
-  return;
-}
 
-if (!response.ok) {
-  alert("Something went wrong!");
-  return;
-}
+  if (!response.ok) {
+    alert("Something went wrong!");
+    return;
+  }
 
-const responseData = await response.json();
-const todos = responseData.todos;
+  const responseData = await response.json();
+  const todos = responseData.todos;
 
-for (const todo of todos) {
-  createTodoListItem(todo.text, todo.id);
+  for (const todo of todos) {
+    createTodoListItem(todo.text, todo.id);
+  }
 }
 
 function createTodoListItem(todoText, todoId) {
@@ -35,7 +35,7 @@ function createTodoListItem(todoText, todoId) {
 
   const editTodoButtonElement = document.createElement("button");
   editTodoButtonElement.textContent = "Edit";
-  editTodoButtonElement, addEventListener("click", startTodoEditing);
+  editTodoButtonElement.addEventListener("click", startTodoEditing);
 
   const deleteTodoButtonElement = document.createElement("button");
   deleteTodoButtonElement.textContent = "Delete";
