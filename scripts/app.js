@@ -6,4 +6,4 @@ const TodosApp = {
   },
 };
 
-Vue.createApp(TodosApp).mount();
+Vue.createApp(TodosApp).mount("#todos-app");
