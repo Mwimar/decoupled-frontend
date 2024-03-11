@@ -2,7 +2,7 @@ const TodosApp = {
   data() {
     return {
       newTodo: "Learn Vue",
-      enteredTodoText: "",
+      enteredTodoText: "new tod0....",
     };
   },
   methods: {
