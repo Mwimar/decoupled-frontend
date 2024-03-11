@@ -2,12 +2,13 @@ const TodosApp = {
   data() {
     return {
       newTodo: "Learn Vue",
+      enteredTodoText: "",
     };
   },
   methods: {
     saveTodo(event) {
       event.preventDefault();
-      this.newTodo = "Updated!";
+      this.newTodo = this.enteredTodoText;
     },
   },
 };
