@@ -7,6 +7,7 @@ const TodosApp = {
   methods: {
     saveTodo(event) {
       event.preventDefault();
+      this.newTodo = "Updated!";
     },
   },
 };
