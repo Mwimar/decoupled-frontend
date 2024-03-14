@@ -3,14 +3,16 @@ const TodosApp = {
     return {
       todos: [],
       enteredTodoText: "",
+      editedTodoId: null,
     };
   },
   methods: {
     saveTodo(event) {
       event.preventDefault();
       if (this.editedTodoId) {
+        const todoId = this.editedTodoId;
         const todoIndex = this.todos.findIndex(function (todoItem) {
-          return todoItem.id === this.editedTodoId;
+          return todoItem.id === todoId;
         });
         const updatedTodoItem = {
           id: this.todos[todoIndex].id,
@@ -18,6 +20,7 @@ const TodosApp = {
         };
 
         this.todos[todoIndex] = updatedTodoItem;
+        this.editedTodoId = null;
       } else {
         const newTodo = {
           text: this.enteredTodoText,
