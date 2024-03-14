@@ -24,9 +24,10 @@
         </form>
       </section>
       <section id="todos">
+        <p>No todos added yet - maybe start adding some?</p>
         <ul id="todos-list">
           <li v-for="todo in todos">
-            <p>{{...}}</p>
+            <p>{{todo.text}}</p>
             <div>
               <button>Edit</button>
               <button>Delete</button>
