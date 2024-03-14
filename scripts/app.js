@@ -9,6 +9,7 @@ const TodosApp = {
       event.preventDefault();
       const newTodo = {
         text: this.enteredTodoText,
+        id: new Date().toISOString(),
       };
       enteredTodoText = "";
     },
