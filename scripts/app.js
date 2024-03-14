@@ -19,6 +19,10 @@ const TodosApp = {
     },
     startEditTodo(todoId) {
       this.editedTodoId = todoId;
+      const todo = this.todos.find(function (todoItem) {
+        return (todoItem.id = todoId);
+      });
+      this.enteredTodoText = todo.text;
     },
   },
 };
