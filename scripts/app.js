@@ -17,8 +17,8 @@ const TodosApp = {
       this.todos.push(newTodo);
       enteredTodoText = "";
     },
-    startEditTodo() {
-      this.editedTodoId;
+    startEditTodo(todoId) {
+      this.editedTodoId = todoId;
     },
   },
 };
