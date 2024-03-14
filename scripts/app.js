@@ -1,6 +1,7 @@
 const TodosApp = {
   data() {
     return {
+      todos: [],
       enteredTodoText: "",
     };
   },
@@ -11,6 +12,8 @@ const TodosApp = {
         text: this.enteredTodoText,
         id: new Date().toISOString(),
       };
+
+      this.todos.push(newTodo);
       enteredTodoText = "";
     },
   },
