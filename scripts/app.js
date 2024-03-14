@@ -11,6 +11,7 @@ const TodosApp = {
       const newTodo = {
         text: this.enteredTodoText,
         id: new Date().toISOString(),
+        editedTodoId: null,
       };
 
       this.todos.push(newTodo);
