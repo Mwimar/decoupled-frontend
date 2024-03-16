@@ -39,7 +39,11 @@ const TodosApp = {
       });
       this.enteredTodoText = todo.text;
     },
-    deleteTodo(todoId) {},
+    deleteTodo(todoId) {
+      this.todos.filter(function (todoItem) {
+        return todoItem.id !== todoId;
+      });
+    },
   },
 };
 
