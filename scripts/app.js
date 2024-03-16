@@ -39,6 +39,7 @@ const TodosApp = {
       });
       this.enteredTodoText = todo.text;
     },
+    deleteTodo(todoId) {},
   },
 };
 
