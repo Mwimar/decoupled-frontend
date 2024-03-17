@@ -1,6 +1,7 @@
 const TodosApp = {
   data() {
     return {
+      isLoading: false,
       todos: [],
       enteredTodoText: "",
       editedTodoId: null,
@@ -71,13 +72,18 @@ const TodosApp = {
     },
   },
   async created() {
+    this.isLoading = true;
+
     let response;
     try {
       response = await fetch("http://localhost:3000/todos");
     } catch (error) {
       alert("Something Went wrong!");
+      this.isLoading = false;
       return;
     }
+
+    this.isLoading = false;
 
     if (!response.ok) {
       alert("Something went wrong!");
