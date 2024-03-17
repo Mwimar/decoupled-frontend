@@ -20,7 +20,7 @@ const TodosApp = {
           response = await fetch("http://localhost:3000/todos/" + todoId, {
             method: "PATCH",
             body: JSON.stringify({
-              newText: newTodoText,
+              newText: this.enteredTodoText,
             }),
             headers: {
               "Content-Type": "application/json",
@@ -85,10 +85,21 @@ const TodosApp = {
       });
       this.enteredTodoText = todo.text;
     },
-    deleteTodo(todoId) {
+    async deleteTodo(todoId) {
       this.todos.filter(function (todoItem) {
         return todoItem.id !== todoId;
       });
+
+      let response;
+
+      try {
+        response = await fetch("http://localhost:3000/todos/" + todoId, {
+          method: "DELETE",
+        });
+      } catch (error) {
+        alert("Something went wrong!");
+        return;
+      }
     },
   },
   async created() {
