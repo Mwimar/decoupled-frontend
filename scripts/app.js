@@ -85,7 +85,7 @@ const TodosApp = {
     }
 
     const responseData = await response.json();
-    const todos = responseData.todos;
+    this.todos = responseData.todos;
   },
 };
 
