@@ -11,7 +11,26 @@ const TodosApp = {
     async saveTodo(event) {
       event.preventDefault();
       if (this.editedTodoId) {
+        //updating
         const todoId = this.editedTodoId;
+
+        let response;
+
+        try {
+          response = await fetch("http://localhost:3000/todos/" + todoId, {
+            method: "PATCH",
+            body: JSON.stringify({
+              newText: newTodoText,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+        } catch (error) {
+          alert("Something went wrong!");
+          return;
+        }
+
         const todoIndex = this.todos.findIndex(function (todoItem) {
           return todoItem.id === todoId;
         });
@@ -23,6 +42,7 @@ const TodosApp = {
         this.todos[todoIndex] = updatedTodoItem;
         this.editedTodoId = null;
       } else {
+        //creating
         let response;
 
         try {
