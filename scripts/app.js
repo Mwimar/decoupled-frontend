@@ -70,6 +70,23 @@ const TodosApp = {
       });
     },
   },
+  async created() {
+    let response;
+    try {
+      response = await fetch("http://localhost:3000/todos");
+    } catch (error) {
+      alert("Something Went wrong!");
+      return;
+    }
+
+    if (!response.ok) {
+      alert("Something went wrong!");
+      return;
+    }
+
+    const responseData = await response.json();
+    const todos = responseData.todos;
+  },
 };
 
 Vue.createApp(TodosApp).mount("#todos-app");
